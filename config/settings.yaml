@@ -1,0 +1,31 @@
+project:
+  name: konfio-exchange-rates
+  environment: local
+api:
+  base_url: https://api.frankfurter.dev
+  range_endpoint: /v1/{start_date}..{end_date}
+  timeout_seconds: 10
+  connect_timeout_seconds: 5
+  read_timeout_seconds: 15
+  max_retries: 3
+  retry_backoff_seconds: 1
+  retry_status_codes: [408, 429, 500, 502, 503, 504]
+source:
+  start_date: '2024-01-01'
+  end_date: '2024-06-30'
+  base_currency: USD
+  target_currencies: [MXN, EUR, BRL, COP]
+validation:
+  min_exchange_rate: 0.0
+  max_exchange_rate: 1000000.0
+iceberg:
+  catalog_name: konfio
+  database_name: db
+  storage_type: minio
+  warehouse_path: s3a://konfio-warehouse/
+  s3_endpoint: http://minio:9000
+  s3_access_key_id: minioadmin
+  s3_secret_access_key: minioadmin
+  s3_path_style_access: true
+output:
+  events_path: events

@@ -1,0 +1,11 @@
+.git
+.gitignore
+.env
+.pytest_cache
+__pycache__
+*.py[cod]
+warehouse
+events
+logs
+tests
+

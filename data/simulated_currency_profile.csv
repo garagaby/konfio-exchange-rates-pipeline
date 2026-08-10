@@ -1,0 +1,6 @@
+currency_code,currency_name,market_region,market_tier,typical_spread_bps,settlement_lag_days,source_name
+USD,US Dollar,North America,major,1.2,0,simulated_csv
+MXN,Mexican Peso,Latin America,emerging,12.5,2,simulated_csv
+EUR,Euro,Europe,major,0.8,2,simulated_csv
+BRL,Brazilian Real,Latin America,emerging,18.4,2,simulated_csv
+COP,Colombian Peso,Latin America,emerging,22.7,2,simulated_csv
