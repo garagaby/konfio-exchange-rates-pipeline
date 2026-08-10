@@ -8,30 +8,30 @@ The pipeline consumes historical USD exchange rates from the Frankfurter API, cl
 
 ## Implementation checklist
 
-- ✅ Extracción histórica desde Frankfurter API con base `USD` y monedas `MXN`, `EUR`, `BRL`, `COP`.
+- ✅ Historical extraction from the Frankfurter API using `USD` as the base and `MXN`, `EUR`, `BRL`, and `COP` as targets.
 - ✅ Handles weekends, holidays, missing coverage, HTTP errors, rate limiting, timeouts, and exponential-backoff retries.
-- ✅ DataFrame PySpark con schema tipado.
-- ✅ Limpieza: nulos, rangos válidos, duplicados y tipos de datos.
-- ✅ Enriquecimiento: variación diaria, promedios móviles de 7/30 días y volatilidad móvil.
-- ✅ Agregaciones mensuales por moneda: promedio, mínimo, máximo, volatilidad y observaciones.
-- ✅ Detección de anomalías con comportamiento móvil de 30 días y umbral de 2 desviaciones estándar.
+- ✅ Typed PySpark DataFrame.
+- ✅ Cleaning: nulls, valid ranges, duplicates, and data types.
+- ✅ Enrichment: daily variation, 7/30-day moving averages, and rolling volatility.
+- ✅ Monthly aggregations by currency: average, minimum, maximum, volatility, and observations.
+- ✅ Anomaly detection using 30-day rolling behavior and a two-standard-deviation threshold.
 - ✅ Quality report: daily coverage, missing dates, weekend/holiday gaps, and general statistics.
 - ✅ Incremental CDC keyed by `rate_date + base_currency + quote_currency`.
-- ✅ Estrategia de comparación por hash de fila (`row_hash`).
-- ✅ CDC `INSERT` y `UPDATE`, con auditoría (`ingestion_timestamp`, `updated_at`).
+- ✅ Row-hash comparison strategy using (`row_hash`).
+- ✅ CDC `INSERT` and `UPDATE` operations with audit fields (`ingestion_timestamp`, `updated_at`).
 - ✅ Analytical model with documented facts, dimensions, grains, keys, and relationships.
 - ✅ Optional payments model: `fact_transactions`, `dim_customer`, `dim_card`.
 - ✅ Second source: simulated CSV joined to `dim_currency` for currency enrichment.
-- ✅ Eventos JSON derivados del CDC, un evento por cambio, con tipo, timestamp, entidad y payload.
-- ✅ Apache Iceberg con runtime Spark, catálogo Hadoop y tablas particionadas por año/mes.
-- ✅ `MERGE INTO` para la carga incremental.
-- ✅ Time travel para consultar el snapshot anterior.
-- ✅ MinIO como almacenamiento S3-compatible ejecutado con Docker.
-- ✅ Docker Compose ejecuta el pipeline de principio a fin sin pasos manuales.
-- ✅ Logs de startup, configuración, Spark, DAG, extracción, transformación, carga, eventos y finalización/fallo.
-- ✅ DAG con dependencias explícitas entre etapas.
-- ✅ Tests unitarios y validación de transformaciones, CDC, eventos, modelo y configuración.
-- ✅ Notebook Jupyter con análisis exploratorio de los datos generados.
+- ✅ CDC-derived JSON events, one event per change, with type, timestamp, entity, and payload.
+- ✅ Apache Iceberg with the Spark runtime, Hadoop catalog, and year/month-partitioned tables.
+- ✅ `MERGE INTO` for incremental loading.
+- ✅ Time travel to query the previous snapshot.
+- ✅ MinIO as S3-compatible storage running in Docker.
+- ✅ Docker Compose runs the complete pipeline without manual steps.
+- ✅ Logs for startup, configuration, Spark, DAG, extraction, transformation, loading, events, and completion/failure.
+- ✅ DAG with explicit dependencies between stages.
+- ✅ Unit tests and validation for transformations, CDC, events, modeling, and configuration.
+- ✅ Jupyter notebook with exploratory analysis of the generated data.
 
 ## Repository layout
 
